@@ -1,0 +1,16 @@
+D:\Program-Files\CS-Projects\TheZoo\TheZoo\TheZoo\bin\Debug\net5.0\TheZoo.exe
+D:\Program-Files\CS-Projects\TheZoo\TheZoo\TheZoo\bin\Debug\net5.0\TheZoo.deps.json
+D:\Program-Files\CS-Projects\TheZoo\TheZoo\TheZoo\bin\Debug\net5.0\TheZoo.runtimeconfig.json
+D:\Program-Files\CS-Projects\TheZoo\TheZoo\TheZoo\bin\Debug\net5.0\TheZoo.runtimeconfig.dev.json
+D:\Program-Files\CS-Projects\TheZoo\TheZoo\TheZoo\bin\Debug\net5.0\TheZoo.dll
+D:\Program-Files\CS-Projects\TheZoo\TheZoo\TheZoo\bin\Debug\net5.0\ref\TheZoo.dll
+D:\Program-Files\CS-Projects\TheZoo\TheZoo\TheZoo\bin\Debug\net5.0\TheZoo.pdb
+D:\Program-Files\CS-Projects\TheZoo\TheZoo\TheZoo\obj\Debug\net5.0\TheZoo.csproj.AssemblyReference.cache
+D:\Program-Files\CS-Projects\TheZoo\TheZoo\TheZoo\obj\Debug\net5.0\TheZoo.GeneratedMSBuildEditorConfig.editorconfig
+D:\Program-Files\CS-Projects\TheZoo\TheZoo\TheZoo\obj\Debug\net5.0\TheZoo.AssemblyInfoInputs.cache
+D:\Program-Files\CS-Projects\TheZoo\TheZoo\TheZoo\obj\Debug\net5.0\TheZoo.AssemblyInfo.cs
+D:\Program-Files\CS-Projects\TheZoo\TheZoo\TheZoo\obj\Debug\net5.0\TheZoo.csproj.CoreCompileInputs.cache
+D:\Program-Files\CS-Projects\TheZoo\TheZoo\TheZoo\obj\Debug\net5.0\TheZoo.dll
+D:\Program-Files\CS-Projects\TheZoo\TheZoo\TheZoo\obj\Debug\net5.0\ref\TheZoo.dll
+D:\Program-Files\CS-Projects\TheZoo\TheZoo\TheZoo\obj\Debug\net5.0\TheZoo.pdb
+D:\Program-Files\CS-Projects\TheZoo\TheZoo\TheZoo\obj\Debug\net5.0\TheZoo.genruntimeconfig.cache
