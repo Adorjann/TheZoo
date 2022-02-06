@@ -10,7 +10,25 @@ namespace TheZoo.Jobs
     public class Cashier : Job
     {
         private TicketOffice _ticketOffice;
+
         public event EventHandler<TheZooJobEventArgs> VisitorEntering;
+
+        private static bool isInstanciated = false;
+        private static Cashier theInstance;
+
+        public static Cashier GiveMeCashier()
+        {
+            if (!isInstanciated)
+            {
+                isInstanciated = true;
+                return theInstance = new Cashier();
+            }
+            else
+            {
+                return theInstance;
+            }
+        }
+
         public event EventHandler<TheZooJobEventArgs> CallingAdminToTheTicketOffice;
 
         public Cashier() : base (typeof(Cashier))
@@ -23,25 +41,27 @@ namespace TheZoo.Jobs
         public override bool DoTheWork(object theObject, Employee employee)
         {
             Visitor visitor = (Visitor)theObject;
-            Visitor processedVisitor = ProcessTheVisitor(visitor, employee);
+            Visitor processedVisitor = this.ProcessTheVisitor(visitor, employee);
 
 
 
-            if(processedVisitor != null && processedVisitor.Ticket != null)
+            if (processedVisitor != null && processedVisitor.Ticket != null)
             {
                 TheZooJobEventArgs args = new();
                 args.theObject = processedVisitor;
-                OnVisitorEntering(args);
+                this.OnVisitorEntering(args);
                 return true;
             }
+
             return false;
         }
+
         public Visitor ProcessTheVisitor(Visitor visitor, Employee employee)
         {
-            double ticketPriceToPay = CalcPriceToPay(visitor);
+            double ticketPriceToPay = this.CalcPriceToPay(visitor);
             if (visitor.CashBalance < ticketPriceToPay && employee.Role == EmployeeRoleEnum.CASHIER)
             {
-                TicketOffice.TicketsFailedToSell++;
+                this.TicketOffice.TicketsFailedToSell++;
                 return null;
             }
             else
@@ -50,37 +70,34 @@ namespace TheZoo.Jobs
                 double? ticketCharged = visitor.RemoveFromCashBalance(employeesPartToCharge);
                 if (ticketCharged == null)
                 {
-                    TicketOffice.TicketsFailedToSell++;
+                    this.TicketOffice.TicketsFailedToSell++;
                     return null;
                 }
                 else
                 {
-                    TicketOffice.CashInRegistry += ticketCharged.Value;
+                    this.TicketOffice.CashInRegistry += ticketCharged.Value;
 
-                    if(employee.Role == EmployeeRoleEnum.CASHIER)
+                    if (employee.Role == EmployeeRoleEnum.CASHIER)
                     {
-                        TheZooJobEventArgs args = new();
+                        TheZooJobEventArgs args = new ();
                         args.theObject = visitor;
-                        OnCallTheAdmin(args);
-                        
+                        this.OnCallTheAdmin(args);
                     }
-                    else if(employee.Role == EmployeeRoleEnum.ADMINISTRATOR)
+                    else if (employee.Role == EmployeeRoleEnum.ADMINISTRATOR)
                     {
-                        Ticket ticket = TicketOffice.PrintTheTicket(visitor, ticketPriceToPay);
+                        Ticket ticket = this.TicketOffice.PrintTheTicket(visitor, ticketPriceToPay);
                         visitor.Ticket = ticket;
                     }
 
-                    return visitor; 
+                    return visitor;
                 }
             }
-
-
         }
 
         protected virtual void OnCallTheAdmin(TheZooJobEventArgs args)
         {
-            EventHandler<TheZooJobEventArgs> handler = CallingAdminToTheTicketOffice;
-            if(handler != null)
+            EventHandler<TheZooJobEventArgs> handler = this.CallingAdminToTheTicketOffice;
+            if (handler != null)
             {
                 handler(this, args);
             }
@@ -88,19 +105,23 @@ namespace TheZoo.Jobs
 
         private double CalcPriceToPay(Visitor visitor)
         {
-
-            if (visitor.Age < 7) { return TicketOffice.TicketPrice / 2; }
-            else { return TicketOffice.TicketPrice; }
+            if (visitor.Age < 7)
+            {
+                return TicketOffice.TicketPrice / 2;
+            }
+            else
+            {
+                return TicketOffice.TicketPrice;
+            }
         }
 
         protected virtual void OnVisitorEntering(TheZooJobEventArgs args)
         {
-            EventHandler<TheZooJobEventArgs> handler = VisitorEntering;
-            if(handler != null)
+            EventHandler<TheZooJobEventArgs> handler = this.VisitorEntering;
+            if (handler != null)
             {
                 handler(this, args);
             }
         }
-
     }
 }

@@ -10,6 +10,7 @@ namespace TheZoo.Animals
     public class Giraffe : Animal
     {
         private const double foodNeedInKg = 40;
+
         private static readonly  Type foodPreference = typeof(Grass);
 
 

@@ -18,8 +18,11 @@ namespace TheZoo
 
 
         public EmployeeRoleEnum Role { get => _role; }
+
         public double PercentageOfWork { get => _percentageOfWork; }
+
         public List<Job> Jobs { get => _jobs; }
+
         public int Id { get => _id; set => _id = value; }
 
         public bool AddJob(Job job)
@@ -31,31 +34,34 @@ namespace TheZoo
                 this.Jobs.Add(job);
                 if (this.Jobs.Contains(job))
                 {
-                    RoleSetter();
+                    this.RoleSetter();
                     return true;
                 }
             }
+
             return false;
         }
+
         public bool RemoveJob(Job job)
         {
             return this.Jobs.Remove(job);
         }
+
         private void RoleSetter()
         {
-            if(this.Jobs.Count == 2)
+            if (this.Jobs.Count == 2)
             {
                 this._role = EmployeeRoleEnum.ADMINISTRATOR;
                 this._percentageOfWork = 25;
             }
             else
             {
-                if(this.Jobs[0].GetType().Name == "Cashier")
+                if (this.Jobs[0].GetType().Name == "Cashier")
                 {
                     this._role = EmployeeRoleEnum.CASHIER;
                     this._percentageOfWork = 75;
                 }
-                else if(this.Jobs[0].GetType().Name == "Worker")
+                else if (this.Jobs[0].GetType().Name == "Worker")
                 {
                     this._role = EmployeeRoleEnum.WORKER;
                     this._percentageOfWork = 75;
@@ -67,10 +73,9 @@ namespace TheZoo
         public bool DoYourJob(Animal animal)
         {
 
-            //because administrators have 2jobs, additional filtering is needed
-            if(this.Role == EmployeeRoleEnum.ADMINISTRATOR)
+            // because administrators have 2jobs, additional filtering is needed
+            if (this.Role == EmployeeRoleEnum.ADMINISTRATOR)
             {
-
                 if (this.Jobs[0].TypeOfWork.Equals(typeof(Worker)))
                 {
                     if (!this.Jobs[0].DoTheWork(animal, this))
@@ -88,22 +93,21 @@ namespace TheZoo
             }
             else
             {
-                //if this Employee  a Worker
-                if(!this.Jobs[0].DoTheWork(animal, this))
+                // if this Employee  a Worker
+                if (!this.Jobs[0].DoTheWork(animal, this))
                 {
                     return false;
                 }
-
             }
+
             return true;
         }
+
         public bool DoYourJob(Visitor visitor)
         {
-
-            //because administrators have 2jobs, additional filtering is needed
+            // because administrators have 2jobs, additional filtering is needed
             if (this.Role == EmployeeRoleEnum.ADMINISTRATOR)
             {
-
                 if (this.Jobs[0].TypeOfWork.Equals(typeof(Cashier)))
                 {
                     if (!this.Jobs[0].DoTheWork(visitor, this))
@@ -121,13 +125,13 @@ namespace TheZoo
             }
             else
             {
-                //if this Employee is a Cashier
+                // if this Employee is a Cashier
                 if (!this.Jobs[0].DoTheWork(visitor, this))
                 {
                     return false;
                 }
-
             }
+
             return true;
         }
     }

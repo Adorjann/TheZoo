@@ -14,13 +14,29 @@ namespace TheZoo.Jobs
 
         public FoodStorage FoodStorage { get => _foodStorage; set => _foodStorage = value; }
 
-        public Worker() : base(typeof(Worker))
+        private static bool isInstanciated = false;
+        private static Worker theInstance;
+
+        private Worker() : base(typeof(Worker))
         {
 
         }
 
+        public static Worker GiveMeWorker()
+        {
+            if (!isInstanciated)
+            {
+                isInstanciated=true;
+                return theInstance = new Worker();
+            }
+            else
+            {
+                return theInstance;
+            }
+        }
 
-        public override bool DoTheWork(object theObject,Employee employee)
+        
+        public override bool DoTheWork(object theObject, Employee employee)
         {
             Animal animal = (Animal)theObject;
             double foodToGiveInPercentage = employee.PercentageOfWork;
@@ -30,21 +46,20 @@ namespace TheZoo.Jobs
 
             Food foodToFeedAnimal = this.FoodStorage.RemoveFood(animal.FoodPreference, amountOfFoodToFeed);
 
-            if(foodToFeedAnimal == null)
+            if (foodToFeedAnimal == null)
             {
                 return false;
             }
-            
-                if (animal.Eat(foodToFeedAnimal))
-                {
+
+            if (animal.Eat(foodToFeedAnimal))
+            {
                     Console.WriteLine($"|{animal.Id}|{animal.GetType().Name} was fed {amountOfFoodToFeed}Kg of {animal.FoodPreference.Name}" +
                         $"\n\tby|{employee.Role.ToString().ToLower()}|{employee.Id}|\n");
                     return true;
-                }
-                Console.WriteLine($"Something went wrong, {animal.GetType().Name} didn't get his food");
-                return false;
-            
-            
+            }
+
+            Console.WriteLine($"Something went wrong, {animal.GetType().Name} didn't get his food");
+            return false;
         }
     }
 }

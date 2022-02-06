@@ -9,7 +9,7 @@ namespace TheZoo
 {
     public class TicketOffice
     {
-        private  const double _ticketPrice = 800;
+        private const double _ticketPrice = 800;
         private double _cashInRegistry;
         private int _ticketsSold;
         private int _ticketsFailedToSell;
@@ -17,19 +17,20 @@ namespace TheZoo
         public static double TicketPrice => _ticketPrice;
 
         public double CashInRegistry { get => _cashInRegistry; set => _cashInRegistry = value; }
+
         public int TicketsSold { get => _ticketsSold; set => _ticketsSold = value; }
+
         public int TicketsFailedToSell { get => _ticketsFailedToSell; set => _ticketsFailedToSell = value; }
-
-
 
         public Ticket PrintTheTicket(Visitor visitor, double price)
         {
-            if(visitor!=null && price != 0)
+            if (visitor != null && price != 0)
             {
-               Ticket ticket = new(price, visitor);
-                TicketsSold++;
-                return ticket;
+               Ticket ticket = new (price, visitor);
+               this.TicketsSold++;
+               return ticket;
             }
+
             return null;
         }
     }

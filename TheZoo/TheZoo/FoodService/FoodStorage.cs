@@ -8,7 +8,6 @@ namespace TheZoo.FoodService
 {
     public class FoodStorage
     {
-        
         private List<Food> _allFood = new List<Food>();
 
         public FoodStorage()
@@ -23,24 +22,24 @@ namespace TheZoo.FoodService
         public bool AddFood (Food newFood)
         {
             Food food =  _allFood.Find(f => f.GetType() == newFood.GetType());
-            if(food != null)
+            if (food != null)
             {
                 return food.addQuantity(newFood.Quantity);
             }
+
             return false;
         }
 
         public Food RemoveFood(Type foodType, double amount)
         {
             Food food = _allFood.Find(f => f.GetType() == foodType);
-            if(food != null)
+            if (food != null)
             {
                 Food removedFood = (Food)Activator.CreateInstance(foodType);
 
                 double foodAmount = food.RemoveAmount(amount);
-                if(removedFood.addQuantity(foodAmount))
+                if (removedFood.addQuantity(foodAmount))
                 {
-                    
                     return removedFood;
                 }
                 else
@@ -48,11 +47,9 @@ namespace TheZoo.FoodService
                     Console.WriteLine();
                     Console.WriteLine($"You can't remove more {foodType.Name} than we have. Try again with the proper amount");
                 }
-                
             }
+
             return null;
         }
-
-        
     }
 }

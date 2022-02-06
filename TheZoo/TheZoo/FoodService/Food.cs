@@ -14,6 +14,7 @@ namespace TheZoo.FoodService
         {
 
         }
+
         public Food(double quantity)
         {
             _quantity = quantity;
@@ -23,26 +24,32 @@ namespace TheZoo.FoodService
 
         public bool addQuantity(double amount)
         {
-            if (amount <= 0) { return false; }
+            if (amount <= 0)
+            {
+                return false;
+            }
 
             double quantBeforeAdd = this._quantity;
             this._quantity += amount;
 
-            if(quantBeforeAdd + amount == Quantity)
+            if (quantBeforeAdd + amount == Quantity)
             {
                 return true;
-            }else { return false; }
+            }else
+            {
+                return false;
+            }
         }
+
         public double RemoveAmount(double amount)
         {
-            if (amount <= 0) { return 0; }
+            if (amount <= 0) {return 0; }
 
             double quantBeforeRemove = this._quantity;
             this._quantity -= amount;
-            if(this._quantity < 0)
+            if (this._quantity < 0)
             {
                 this._quantity = quantBeforeRemove;
-                
                 return 0;
             }
 
@@ -52,6 +59,5 @@ namespace TheZoo.FoodService
             }
             else { return 0; }
         }
-
     }
 }

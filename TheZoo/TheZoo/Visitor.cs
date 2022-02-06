@@ -22,8 +22,11 @@ namespace TheZoo
         }
 
         public double CashBalance { get => _cashBalance; }
+
         public int Age { get => _age; }
+
         public Ticket Ticket { get => ticket; set => ticket = value; }
+
         public int Id { get => _id; }
 
         public override bool Equals(Object obj)
@@ -38,8 +41,6 @@ namespace TheZoo
 
             this._cashBalance -= amount;
             return amount;
-
         }
-
-    }   
+    }
 }

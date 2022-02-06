@@ -8,16 +8,16 @@ using TheZoo.FoodService;
 
 namespace TheZoo
 {
-    public abstract  class Job
+    public abstract class Job
     {
+        private Type _typeOfWork;
 
-        private Type _typeOfWork; 
         public Job(Type typeOfWork) {
             this._typeOfWork = typeOfWork;
         }
 
         public Type TypeOfWork { get => _typeOfWork;  }
 
-        public abstract  bool DoTheWork(object theObject,Employee employee) ;
+        public abstract bool DoTheWork(object theObject,Employee employee);
     }
 }

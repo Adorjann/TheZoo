@@ -19,8 +19,11 @@ namespace TheZoo.Animals
         private static Timer _feedingTimer = new();
 
         public double FoodNeedInKg { get => _foodNeedInKg;}
+
         public Type FoodPreference { get => _foodPreference;  }
+
         public int Id { get => _id; set => _id = value; }
+
         public int LenghtOfTheDay { get; internal set; }
 
         public Animal(double dailyFoodNeedInKg, Type foodPreference)
@@ -28,22 +31,17 @@ namespace TheZoo.Animals
             _foodNeedInKg = dailyFoodNeedInKg;
             _foodPreference = foodPreference;
 
-            //creating a full stomach to start the daily timer
+            // creating a full stomach to start the daily timer
             this._foodEatenTodayInKg = dailyFoodNeedInKg;
-
-
-            
         }
-
 
         public virtual bool Eat(Food food)
         {
-            if(food.GetType() == this.FoodPreference)
-            { 
-                if(this.FoodNeedInKg != this._foodEatenTodayInKg)
+            if (food.GetType() == this.FoodPreference)
+            {
+                if (this.FoodNeedInKg != this._foodEatenTodayInKg)
                 {
                     this._foodEatenTodayInKg += food.Quantity;
-                    
                 }
                 else
                 {
@@ -57,44 +55,39 @@ namespace TheZoo.Animals
                 return false;
             }
 
-            IsdailyNeedSatisfyed();
+            this.IsdailyNeedSatisfyed();
             return true;
         }
 
-
         public void IsdailyNeedSatisfyed()
         {
-            if(this.FoodNeedInKg == this._foodEatenTodayInKg)
+            if (this.FoodNeedInKg == this._foodEatenTodayInKg)
             {
-                
                 Animal._feedingTimer.Interval= LenghtOfTheDay;
-                Animal._feedingTimer.Elapsed += OnFeedMePlease;
+                Animal._feedingTimer.Elapsed += this.OnFeedMePlease;
                 Animal._feedingTimer.AutoReset = false;
                 Animal._feedingTimer.Enabled = true;
-
-
             }
         }
-
 
         public void OnFeedMePlease(Object source, ElapsedEventArgs e)
         {
 
             Animal._feedingTimer.Stop();
 
-            //returning the food eaten today to 0
+            // returning the food eaten today to 0
             this._foodEatenTodayInKg = 0;
 
-            //setting the value for the event
+            // setting the value for the event
             TheZooJobEventArgs args = new TheZooJobEventArgs();
             args.theObject = this;
-            OnFeedMePlease(args);
+            this.OnFeedMePlease(args);
         }
 
         protected virtual void OnFeedMePlease(TheZooJobEventArgs args)
         {
-            EventHandler<TheZooJobEventArgs> handler = EventHungryAnimal;
-            if(handler != null)
+            EventHandler<TheZooJobEventArgs> handler = this.EventHungryAnimal;
+            if (handler != null)
             {
                 handler(this, args);
             }
