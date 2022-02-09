@@ -6,4 +6,4 @@ Homework project
 
 
 
-![Screenshot](The Zoo - Class UML.png)
+![Optional Text](master/The Zoo - Class UML.png)
